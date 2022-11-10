@@ -1,0 +1,19 @@
+@page "/AddPost"
+@using BlazorTweetBook.Services
+@inject IPostService _PostService
+<EditForm Model="post" OnValidSubmit="Submitted">
+    <InputText id="Name" class="form-control" @bind-Value="post.Name" placeholder="Enter Post"></InputText>
+    <input type="submit" class="btn btn-primary" value="submixt"/>
+</EditForm>
+
+@code {
+    Post post = new Post();
+
+    private async Task Submitted()
+    {
+        await _PostService.CreateAsync(post);
+        post = new Post();
+
+    }
+
+}

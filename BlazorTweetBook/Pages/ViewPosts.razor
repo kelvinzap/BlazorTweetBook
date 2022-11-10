@@ -1,0 +1,23 @@
+@page "/ViewPosts"
+@using BlazorTweetBook.Services
+@inject IPostService _PostService
+<h3>ViewPosts</h3>
+
+@if (Posts != null)
+{
+    foreach (var post in Posts)
+    {
+        <p>@post.Name</p>
+        <br/>
+    }
+}
+@code {
+    private IEnumerable<Post> Posts { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitializedAsync();
+        Posts = await _PostService.GetAllAsync();
+    }
+
+}
